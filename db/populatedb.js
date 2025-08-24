@@ -27,9 +27,12 @@ CREATE TABLE item_to_pool(
 INSERT INTO items (name) VALUES('Brimstone');
 INSERT INTO items (name) VALUES('Sacred Heart');
 INSERT INTO items (name) VALUES('The Wafer');
+INSERT INTO items (name) VALUES('Dogma');
+INSERT INTO items (name) VALUES('Echo Chamber');
 
 INSERT INTO pools (name) VALUES('Treasure');
 INSERT INTO pools (name) VALUES('Devil');
+INSERT INTO pools (name) VALUES('Secret');
 INSERT INTO pools (name) VALUES('Ultra Secret');
 INSERT INTO pools (name) VALUES('Angel');
 
@@ -39,6 +42,7 @@ INSERT INTO item_to_pool (item, pool) VALUES('Sacred Heart', 'Ultra Secret');
 INSERT INTO item_to_pool (item, pool) VALUES('Sacred Heart', 'Angel');
 INSERT INTO item_to_pool (item, pool) VALUES('The Wafer', 'Angel');
 INSERT INTO item_to_pool (item, pool) VALUES('The Wafer', 'Treasure');
+INSERT INTO item_to_pool (item, pool) VALUES('Echo Chamber', 'Secret');
 `;
 
 DB_URL =

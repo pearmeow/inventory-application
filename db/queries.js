@@ -27,7 +27,7 @@ async function readAllItems() {
 
 async function readItemsFromPool(poolName) {
     const { rows } = await pool.query(
-        "SELECT * FROM item_to_pool WHERE pool=($1)",
+        "SELECT item as name FROM item_to_pool WHERE pool=($1)",
         [poolName],
     );
     return rows;
