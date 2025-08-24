@@ -1,10 +1,9 @@
 const express = require("express");
-const { body, validationResult } = require("express-validator");
 const path = require("node:path");
-const createRouter = require("./routes/createRouter");
+// const createRouter = require("./routes/createRouter");
 const readRouter = require("./routes/readRouter");
-const updateRouter = require("./routes/updateRouter");
-const deleteRouter = require("./routes/deleteRouter");
+// const updateRouter = require("./routes/updateRouter");
+// const deleteRouter = require("./routes/deleteRouter");
 
 const app = express();
 app.use(express.urlencoded({ extended: true })); // make post work and have a body
@@ -15,9 +14,7 @@ const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
 app.use("/", readRouter);
-app.use("/create", createRouter);
-app.use("/update", updateRouter);
-app.use("/delete", deleteRouter);
+// app.use("/create", createRouter);
 
 const PORT = 3000;
 

@@ -1,9 +1,26 @@
 <html>
     <head>
-        <title> Homepage </title>
+        <title><%= title %></title>
         <link rel="stylesheet" href="/styles.css">
     </head>
 <body>
-        <p>Hello world</p>
+        <h1><%= title %></h1>
+        <form action="/", method="GET">
+            <label for="pool">Search Pool</label>
+            <input type="text" id="pool" name="pool">
+            <button type="submit">Submit</button>
+        </form>
+        <p>Pools</p>
+        <ul>
+            <% pools.forEach((item) => { %>
+                <li><%= item.name %></li>
+            <% }) %>
+        </ul>
+        <p>Items in selected pool</p>
+        <ul>
+            <% items.forEach((item) => { %>
+                <li><%= item.name %></li>
+            <% }) %>
+        </ul>
 </body>
 </html>
