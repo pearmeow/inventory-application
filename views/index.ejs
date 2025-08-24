@@ -8,26 +8,33 @@
         <form action="/", method="GET">
             <label for="pool">Search Pool</label>
             <select name="pool" id="pool">
+                <option value="">CHAOS (all)</option>
                 <%- include('./partials/options', {table: pools}) %>
             </select>
             <button type="submit">Submit</button>
         </form>
-        <p>Pools</p>
-        <ul>
-            <% pools.forEach((item) => { %>
-                <li><%= item.name %></li>
-            <% }) %>
+        <ul class="crud">
+            <li><a href="/create">Create</a></li>
+            <li><a href="/delete">Delete</a></li>
+            <li><a href="/update">Update</a></li>
         </ul>
-        <p>Items in selected pool</p>
-        <ul>
-            <% items.forEach((item) => { %>
-                <li><%= item.name %></li>
-            <% }) %>
-        </ul>
-        <ul>
-        <li><a href="/create">Create</a></li>
-        <li><a href="/delete">Delete</a></li>
-        <li><a href="/update">Update</a></li>
-        </ul>
+        <div class="doubleList">
+            <div class="list">
+                <p>Pools</p>
+                <ul>
+                    <% pools.forEach((item) => { %>
+                        <li><%= item.name %></li>
+                    <% }) %>
+                </ul>
+            </div>
+            <div class="list">
+                <p>Items</p>
+                <ul>
+                    <% items.forEach((item) => { %>
+                    <li><%= item.name %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
 </body>
 </html>

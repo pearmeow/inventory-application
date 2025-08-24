@@ -16,7 +16,7 @@ const getData = [
         if (!errors.isEmpty() || req.query.pool === undefined) {
             const items = await readAllItems();
             return res.render("index", {
-                title: "All items",
+                title: "All Items",
                 pools: pools,
                 items: items,
             });
