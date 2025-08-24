@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("node:path");
 const createRouter = require("./routes/createRouter");
 const readRouter = require("./routes/readRouter");
-// const updateRouter = require("./routes/updateRouter");
+const updateRouter = require("./routes/updateRouter");
 const deleteRouter = require("./routes/deleteRouter");
 
 const app = express();
@@ -16,6 +16,7 @@ app.use(express.static(assetsPath));
 app.use("/", readRouter);
 app.use("/create", createRouter);
 app.use("/delete", deleteRouter);
+app.use("/update", updateRouter);
 
 const PORT = 3000;
 

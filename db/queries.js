@@ -57,17 +57,17 @@ async function readItemsFromPool(poolName) {
     return rows;
 }
 
-async function updateItem(itemName, newName) {
+async function updateItem(oldName, newName) {
     await pool.query("UPDATE items SET name=($1) WHERE name=($2)", [
         newName,
-        itemName,
+        oldName,
     ]);
 }
 
-async function updatePool(poolName, newName) {
+async function updatePool(oldName, newName) {
     await pool.query("UPDATE pools SET name=($1) WHERE name=($2)", [
         newName,
-        poolName,
+        oldName,
     ]);
 }
 
