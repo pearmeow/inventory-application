@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+        <h1><%= title %></h1>
+        <form action="/create/itemtopool" method="POST">
+            <label for="item">Item name: </label>
+            <input type="text" id="item" name="item">
+            <label for="pool">Pool name: </label>
+            <input type="text" id="pool" name="pool">
+            <button type="submit">Submit</button>
+        </form>
+        <a href="/create">Back to create page</a>
+</body>
+</html>

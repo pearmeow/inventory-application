@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+        <h1><%= title %></h1>
+        <form action="/create/item" method="POST">
+            <label for="name">Item name: </label>
+            <input type="text" id="name" name="name">
+            <button type="submit">Submit</button>
+        </form>
+        <a href="/create">Back to create page</a>
+</body>
+</html>
