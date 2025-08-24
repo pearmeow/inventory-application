@@ -1,24 +1,39 @@
 const pool = require("./pool");
 
 async function createItem(itemName) {
-    // Do nothing if key already exists with IGNORE
-    await pool.query("INSERT IGNORE INTO items (name) values($1)", [itemName]);
+    await pool.query(
+        "INSERT INTO items (name) values($1) ON CONFLICT DO NOTHING",
+        [itemName],
+    );
 }
 
 async function createPool(poolName) {
-    // Do nothing if key already exists with IGNORE
-    await pool.query("INSERT IGNORE INTO pools (name) values($1)", [poolName]);
+    await pool.query(
+        "INSERT INTO pools (name) values($1) ON CONFLICT DO NOTHING",
+        [poolName],
+    );
 }
 
 async function createItemToPool(itemName, poolName) {
-    const exists = await pool.query(
+    const existsInItems = await pool.query(
+        "SELECT * FROM items WHERE name=($1)",
+        [itemName],
+    );
+    const existsInPools = await pool.query(
+        "SELECT * FROM pools WHERE name=($1)",
+        [poolName],
+    );
+    const existsInTable = await pool.query(
         "SELECT * FROM item_to_pool WHERE item=($1) AND pool=($2)",
         [itemName, poolName],
     );
-    if (exists.rowCount === 0) {
+    if (
+        existsInTable.rowCount === 0 &&
+        existsInItems.rowCount === 1 &&
+        existsInPools.rowCount === 1
+    ) {
         await pool.query(
-            // Do nothing if keys don't exist in respective tables with IGNORE
-            "INSERT IGNORE INTO item_to_pool (item, pool) values(($1), ($2))",
+            "INSERT INTO item_to_pool (item, pool) values($1, $2)",
             [itemName, poolName],
         );
     }
