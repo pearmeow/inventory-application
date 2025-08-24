@@ -13,8 +13,10 @@
             <% }) %>
         </ul>
         <form action="/delete/pool" method="POST">
-            <label for="name">Pool name: </label>
-            <input type="text" id="name" name="name">
+            <label for="name">Pool: </label>
+            <select name="name" id="name">
+                <%- include('../partials/options', {table: pools}) %>
+            </select>
             <button type="submit">Submit</button>
         </form>
         <a href="/delete">Back to delete page</a>

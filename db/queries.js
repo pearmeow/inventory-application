@@ -58,17 +58,23 @@ async function readItemsFromPool(poolName) {
 }
 
 async function updateItem(oldName, newName) {
-    await pool.query("UPDATE items SET name=($1) WHERE name=($2)", [
-        newName,
-        oldName,
-    ]);
+    const exists = pool.query("SELECT * FROM items WHERE name=($1)", [newName]);
+    if (exists.rowCount === 0) {
+        await pool.query("UPDATE items SET name=($1) WHERE name=($2)", [
+            newName,
+            oldName,
+        ]);
+    }
 }
 
 async function updatePool(oldName, newName) {
-    await pool.query("UPDATE pools SET name=($1) WHERE name=($2)", [
-        newName,
-        oldName,
-    ]);
+    const exists = pool.query("SELECT * FROM pools WHERE name=($1)", [newName]);
+    if (exists.rowCount === 0) {
+        await pool.query("UPDATE pools SET name=($1) WHERE name=($2)", [
+            newName,
+            oldName,
+        ]);
+    }
 }
 
 async function deleteItem(itemName) {

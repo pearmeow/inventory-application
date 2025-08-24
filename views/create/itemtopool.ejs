@@ -13,10 +13,14 @@
             <% }) %>
         </ul>
         <form action="/create/itemtopool" method="POST">
-            <label for="item">Item name: </label>
-            <input type="text" id="item" name="item">
-            <label for="pool">Pool name: </label>
-            <input type="text" id="pool" name="pool">
+            <label for="item">Add item </label>
+            <select name="item" id="item">
+                <%- include('../partials/options', {table: items}) %>
+            </select>
+            <label for="pool"> to pool </label>
+            <select name="pool" id="pool">
+                <%- include('../partials/options', {table: pools}) %>
+            </select>
             <button type="submit">Submit</button>
         </form>
         <a href="/create">Back to create page</a>

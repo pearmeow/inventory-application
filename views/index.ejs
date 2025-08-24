@@ -7,7 +7,9 @@
         <h1><%= title %></h1>
         <form action="/", method="GET">
             <label for="pool">Search Pool</label>
-            <input type="text" id="pool" name="pool">
+            <select name="pool" id="pool">
+                <%- include('./partials/options', {table: pools}) %>
+            </select>
             <button type="submit">Submit</button>
         </form>
         <p>Pools</p>

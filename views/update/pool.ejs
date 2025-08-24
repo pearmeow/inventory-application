@@ -13,9 +13,11 @@
             <% }) %>
         </ul>
         <form action="/update/pool" method="POST">
-            <label for="oldName">Pool name: </label>
-            <input type="text" id="oldName" name="oldName">
-            <label for="newName">New name: </label>
+            <label for="oldName"> Change pool </label>
+            <select name="oldName" id="oldName">
+                <%- include('../partials/options', {table: pools}) %>
+            </select>
+            <label for="newName"> to </label>
             <input type="text" id="newName" name="newName">
             <button type="submit">Submit</button>
         </form>

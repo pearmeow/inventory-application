@@ -8,21 +8,37 @@ const {
     deleteItem,
     deletePool,
     deleteItemToPool,
+    readAllItems,
+    readAllPools,
 } = require("../db/queries.js");
 
 const getDelete = (req, res) => {
     res.render("delete", { title: "Delete", errors: [] });
 };
-const getDeleteItem = (req, res) => {
-    res.render("delete/item", { title: "Delete Item", errors: [] });
-};
-const getDeletePool = (req, res) => {
-    res.render("delete/pool", { title: "Delete Pool", errors: [] });
-};
-const getDeleteItemToPool = (req, res) => {
-    res.render("delete/itemtopool", {
-        title: "Delete Item to Pool",
+const getDeleteItem = async (req, res) => {
+    const items = await readAllItems();
+    res.render("delete/item", {
+        title: "Delete Item",
         errors: [],
+        items: items,
+    });
+};
+const getDeletePool = async (req, res) => {
+    const pools = await readAllPools();
+    res.render("delete/pool", {
+        title: "Delete Pool",
+        errors: [],
+        pools: pools,
+    });
+};
+const getDeleteItemToPool = async (req, res) => {
+    const items = await readAllItems();
+    const pools = await readAllPools();
+    res.render("delete/itemtopool", {
+        title: "Delete Item from Pool",
+        errors: [],
+        items: items,
+        pools: pools,
     });
 };
 

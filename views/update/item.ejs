@@ -13,9 +13,11 @@
             <% }) %>
         </ul>
         <form action="/update/item" method="POST">
-            <label for="oldName">Item name: </label>
-            <input type="text" id="oldName" name="oldName">
-            <label for="newName">New name: </label>
+            <label for="oldName"> Change item from </label>
+            <select name="oldName" id="oldName">
+                <%- include('../partials/options', {table: items}) %>
+            </select>
+            <label for="newName"> to </label>
             <input type="text" id="newName" name="newName">
             <button type="submit">Submit</button>
         </form>

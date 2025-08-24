@@ -8,6 +8,8 @@ const {
     createItem,
     createPool,
     createItemToPool,
+    readAllItems,
+    readAllPools,
 } = require("../db/queries.js");
 
 const getCreate = (req, res) => {
@@ -19,10 +21,14 @@ const getCreateItem = (req, res) => {
 const getCreatePool = (req, res) => {
     res.render("create/pool", { title: "Create Pool", errors: [] });
 };
-const getCreateItemToPool = (req, res) => {
+const getCreateItemToPool = async (req, res) => {
+    const items = await readAllItems();
+    const pools = await readAllPools();
     res.render("create/itemtopool", {
-        title: "Create Item to Pool",
+        title: "Add Item to Pool",
         errors: [],
+        items: items,
+        pools: pools,
     });
 };
 
@@ -70,12 +76,16 @@ const validatePair = [
 
 const postCreateItemToPool = [
     validatePair,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const items = await readAllItems();
+            const pools = await readAllPools();
             return res.render("create/itemtopool", {
-                title: "Create Item to Pool",
+                title: "Add Item to Pool",
                 errors: errors.array(),
+                items: items,
+                pools: pools,
             });
         }
         const data = matchedData(req);

@@ -1,16 +1,31 @@
 const { body, validationResult, matchedData } = require("express-validator");
-const { updateItem, updatePool } = require("../db/queries.js");
+const {
+    updateItem,
+    updatePool,
+    readAllItems,
+    readAllPools,
+} = require("../db/queries.js");
 
 const getUpdate = (req, res) => {
     res.render("update", { title: "Update", errors: [] });
 };
 
-const getUpdateItem = (req, res) => {
-    res.render("update/item", { title: "Update Item", errors: [] });
+const getUpdateItem = async (req, res) => {
+    const items = await readAllItems();
+    res.render("update/item", {
+        title: "Update Item",
+        errors: [],
+        items: items,
+    });
 };
 
-const getUpdatePool = (req, res) => {
-    res.render("update/pool", { title: "Update Pool", errors: [] });
+const getUpdatePool = async (req, res) => {
+    const pools = await readAllPools();
+    res.render("update/pool", {
+        title: "Update Pool",
+        errors: [],
+        pools: pools,
+    });
 };
 
 const validatePair = [
@@ -20,12 +35,14 @@ const validatePair = [
 
 const postUpdateItem = [
     validatePair,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const items = await readAllItems();
             return res.render("update/item", {
                 title: "Update Item",
                 errors: errors,
+                items: items,
             });
         }
         const data = matchedData(req);
@@ -36,12 +53,14 @@ const postUpdateItem = [
 
 const postUpdatePool = [
     validatePair,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const pools = await readAllPools();
             return res.render("update/pool", {
                 title: "Update Pool",
                 errors: errors,
+                pools: pools,
             });
         }
         const data = matchedData(req);
