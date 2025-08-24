@@ -1,18 +1,27 @@
 const pool = require("./pool");
 
 async function createItem(itemName) {
-    await pool.query("INSERT INTO items (name) values($1)", [itemName]);
+    // Do nothing if key already exists with IGNORE
+    await pool.query("INSERT IGNORE INTO items (name) values($1)", [itemName]);
 }
 
 async function createPool(poolName) {
-    await pool.query("INSERT INTO pools (name) values($1)", [poolName]);
+    // Do nothing if key already exists with IGNORE
+    await pool.query("INSERT IGNORE INTO pools (name) values($1)", [poolName]);
 }
 
 async function createItemToPool(itemName, poolName) {
-    await pool.query(
-        "INSERT INTO item_to_pool (item, pool) values(($1), ($2))",
+    const exists = await pool.query(
+        "SELECT * FROM item_to_pool WHERE item=($1) AND pool=($2)",
         [itemName, poolName],
     );
+    if (exists.rowCount === 0) {
+        await pool.query(
+            // Do nothing if keys don't exist in respective tables with IGNORE
+            "INSERT IGNORE INTO item_to_pool (item, pool) values(($1), ($2))",
+            [itemName, poolName],
+        );
+    }
 }
 
 async function readAllPools() {
@@ -34,14 +43,14 @@ async function readItemsFromPool(poolName) {
 }
 
 async function updateItem(itemName, newName) {
-    await pool.query("UDPATE items SET name=($1) WHERE name=($2)", [
+    await pool.query("UPDATE items SET name=($1) WHERE name=($2)", [
         newName,
         itemName,
     ]);
 }
 
 async function updatePool(poolName, newName) {
-    await pool.query("UDPATE pools SET name=($1) WHERE name=($2)", [
+    await pool.query("UPDATE pools SET name=($1) WHERE name=($2)", [
         newName,
         poolName,
     ]);
