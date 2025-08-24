@@ -29,8 +29,8 @@ const getUpdatePool = async (req, res) => {
 };
 
 const validatePair = [
-    body("oldName").trim().notEmpty().withMessage("Name must not be empty"),
-    body("newName").trim().notEmpty().withMessage("Name must not be empty"),
+    body("oldName").trim().notEmpty().withMessage("Old name must not be empty"),
+    body("newName").trim().notEmpty().withMessage("New name must not be empty"),
 ];
 
 const postUpdateItem = [
@@ -41,7 +41,7 @@ const postUpdateItem = [
             const items = await readAllItems();
             return res.render("update/item", {
                 title: "Update Item",
-                errors: errors,
+                errors: errors.array(),
                 items: items,
             });
         }
@@ -59,7 +59,7 @@ const postUpdatePool = [
             const pools = await readAllPools();
             return res.render("update/pool", {
                 title: "Update Pool",
-                errors: errors,
+                errors: errors.array(),
                 pools: pools,
             });
         }

@@ -23,6 +23,7 @@ const getDeleteItem = async (req, res) => {
         items: items,
     });
 };
+
 const getDeletePool = async (req, res) => {
     const pools = await readAllPools();
     res.render("delete/pool", {
@@ -49,12 +50,14 @@ const validateName = body("name")
 
 const postDeleteItem = [
     validateName,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const items = await readAllItems();
             return res.render("delete/item", {
                 title: "Delete Item",
-                errors: errors,
+                errors: errors.array(),
+                items: items,
             });
         }
         const data = matchedData(req);
@@ -65,12 +68,14 @@ const postDeleteItem = [
 
 const postDeletePool = [
     validateName,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const pools = await readAllPools();
             return res.render("delete/pool", {
                 title: "Delete Pool",
-                errors: errors,
+                errors: errors.array(),
+                pools: pools,
             });
         }
         const data = matchedData(req);
@@ -86,12 +91,16 @@ const validatePair = [
 
 const postDeleteItemToPool = [
     validatePair,
-    (req, res) => {
+    async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            const items = await readAllItems();
+            const pools = await readAllPools();
             return res.render("delete/pool", {
                 title: "Delete Item to Pool",
-                errors: errors,
+                errors: errors.array(),
+                items: items,
+                pools: pools,
             });
         }
         const data = matchedData(req);
