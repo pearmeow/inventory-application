@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+        <h1><%= title %></h1>
+        <ul>
+            <% errors.forEach((item) => { %>
+                <li><%= item.msg %></li>
+            <% }) %>
+        </ul>
+        <form action="/delete/itemtopool" method="POST">
+            <label for="item">Item name: </label>
+            <input type="text" id="item" name="item">
+            <label for="pool">Pool name: </label>
+            <input type="text" id="pool" name="pool">
+            <button type="submit">Submit</button>
+        </form>
+        <a href="/delete">Back to delete page</a>
+</body>
+</html>

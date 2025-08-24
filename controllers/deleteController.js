@@ -11,16 +11,19 @@ const {
 } = require("../db/queries.js");
 
 const getDelete = (req, res) => {
-    res.render("delete", { title: "Delete" });
+    res.render("delete", { title: "Delete", errors: [] });
 };
 const getDeleteItem = (req, res) => {
-    res.render("delete/item", { title: "Delete Item" });
+    res.render("delete/item", { title: "Delete Item", errors: [] });
 };
 const getDeletePool = (req, res) => {
-    res.render("delete/pool", { title: "Delete Pool" });
+    res.render("delete/pool", { title: "Delete Pool", errors: [] });
 };
 const getDeleteItemToPool = (req, res) => {
-    res.render("delete/itemtopool", { title: "Delete Item to Pool" });
+    res.render("delete/itemtopool", {
+        title: "Delete Item to Pool",
+        errors: [],
+    });
 };
 
 const validateName = body("name")

@@ -3,7 +3,7 @@ const path = require("node:path");
 const createRouter = require("./routes/createRouter");
 const readRouter = require("./routes/readRouter");
 // const updateRouter = require("./routes/updateRouter");
-// const deleteRouter = require("./routes/deleteRouter");
+const deleteRouter = require("./routes/deleteRouter");
 
 const app = express();
 app.use(express.urlencoded({ extended: true })); // make post work and have a body
@@ -15,6 +15,7 @@ app.use(express.static(assetsPath));
 
 app.use("/", readRouter);
 app.use("/create", createRouter);
+app.use("/delete", deleteRouter);
 
 const PORT = 3000;
 
