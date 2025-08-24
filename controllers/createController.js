@@ -14,13 +14,16 @@ const getCreate = (req, res) => {
     res.render("create", { title: "Create" });
 };
 const getCreateItem = (req, res) => {
-    res.render("create/item", { title: "Create Item" });
+    res.render("create/item", { title: "Create Item", errors: [] });
 };
 const getCreatePool = (req, res) => {
-    res.render("create/pool", { title: "Create Pool" });
+    res.render("create/pool", { title: "Create Pool", errors: [] });
 };
 const getCreateItemToPool = (req, res) => {
-    res.render("create/itemtopool", { title: "Create Item to Pool" });
+    res.render("create/itemtopool", {
+        title: "Create Item to Pool",
+        errors: [],
+    });
 };
 
 const validateName = body("name")
@@ -35,7 +38,7 @@ const postCreateItem = [
         if (!errors.isEmpty()) {
             return res.render("create/item", {
                 title: "Create Item",
-                errors: errors,
+                errors: errors.array(),
             });
         }
         const data = matchedData(req);
@@ -51,7 +54,7 @@ const postCreatePool = [
         if (!errors.isEmpty()) {
             return res.render("create/pool", {
                 title: "Create Pool",
-                errors: errors,
+                errors: errors.array(),
             });
         }
         const data = matchedData(req);
@@ -70,9 +73,9 @@ const postCreateItemToPool = [
     (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.render("create/pool", {
+            return res.render("create/itemtopool", {
                 title: "Create Item to Pool",
-                errors: errors,
+                errors: errors.array(),
             });
         }
         const data = matchedData(req);
