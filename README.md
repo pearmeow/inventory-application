@@ -23,7 +23,7 @@ Clone this repo and run `node index`.
 
 Known Limitations
 -----------------
-When creating an item to pool connection if the item and pool don't exist it will silently fail.  
+"Bad" operations like adding an existing item or pool will silently fail.
 
 
 Credits
