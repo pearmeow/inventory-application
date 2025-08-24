@@ -6,11 +6,11 @@ Item pools and their items from The Binding of Isaac, represented using PostgreS
 Features
 --------
 
-- [ ] MVC pattern
-- [ ] Add new items
-- [ ] Add new item pools
-- [ ] Add items to pools
-- [ ] Unique item and pool names
+- [x] MVC pattern
+- [x] Add new items
+- [x] Add new item pools
+- [x] Add items to pools
+- [x] Unique item and pool names
 - [ ] Delete and update items
 - [ ] Delete and update pools
 - [ ] Protection against injection attacks via express-validator
