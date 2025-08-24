@@ -8,10 +8,10 @@ async function createPool(poolName) {
     await pool.query("INSERT INTO pools (name) values($1)", [poolName]);
 }
 
-async function createItemToPool(itemId, poolId) {
+async function createItemToPool(itemName, poolName) {
     await pool.query(
         "INSERT INTO item_to_pool (item, pool) values(($1), ($2))",
-        [itemId, poolId],
+        [itemName, poolName],
     );
 }
 
@@ -25,43 +25,46 @@ async function readAllItems() {
     return rows;
 }
 
-async function readItemsFromPool(poolId) {
+async function readItemsFromPool(poolName) {
     const { rows } = await pool.query(
         "SELECT * FROM item_to_pool WHERE pool=($1)",
-        [poolId],
+        [poolName],
     );
     return rows;
 }
 
-async function updateItem(itemId, newName) {
-    await pool.query("UDPATE items SET name=($1) WHERE id=($2)", [
+async function updateItem(itemName, newName) {
+    await pool.query("UDPATE items SET name=($1) WHERE name=($2)", [
         newName,
-        itemId,
+        itemName,
     ]);
 }
 
-async function updatePool(poolId, newName) {
-    await pool.query("UDPATE pools SET name=($1) WHERE id=($2)", [
+async function updatePool(poolName, newName) {
+    await pool.query("UDPATE pools SET name=($1) WHERE name=($2)", [
         newName,
-        poolId,
+        poolName,
     ]);
 }
 
-async function deleteItem(itemId) {
-    await pool.query("DELETE FROM item_to_pool * WHERE item=($1)", [itemId]);
-    await pool.query("DELETE FROM items * where id=($1)", [itemId]);
+async function deleteItem(itemName) {
+    await pool.query("DELETE FROM items * where name=($1)", [itemName]);
 }
 
-async function deletePool(poolId) {
-    await pool.query("DELETE FROM item_to_pool * WHERE pool=($1)", [poolId]);
-    await pool.query("DELETE FROM pools * where id=($1)", [poolId]);
+async function deletePool(poolName) {
+    await pool.query("DELETE FROM pools * where name=($1)", [poolName]);
 }
 
-async function deleteItemToPool(itemId, poolId) {
+async function deleteItemToPool(itemName, poolName) {
     await pool.query(
         "DELETE FROM item_to_pool * WHERE pool=($1) AND item=($2)",
-        [poolId, itemId],
+        [poolName, itemName],
     );
+}
+
+async function deleteAll() {
+    await pool.query("DELETE FROM pools *");
+    await pool.query("DELETE FROM items *");
 }
 
 module.exports = {
@@ -76,4 +79,5 @@ module.exports = {
     deleteItem,
     deletePool,
     deleteItemToPool,
+    deleteAll,
 };

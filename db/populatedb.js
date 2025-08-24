@@ -4,24 +4,41 @@ const { Client } = require("pg");
 const { argv } = require("node:process");
 require("dotenv").config();
 
-// Sample sql, change to fit database
 const SQL = `
-CREATE TABLE IF NOT EXISTS messages (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  msg VARCHAR ( 255 ),
-  author VARCHAR ( 255 ),
-  date DATE
+DROP TABLE IF EXISTS item_to_pool;
+DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS pools;
+
+CREATE TABLE items(
+    name VARCHAR(64) PRIMARY KEY
 );
 
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Meow', 'Mahdi', '1983-10-20');
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Help me', 'Ivan', '2000-12-20');
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Hello', 'Perry', '1953-12-20');
+CREATE TABLE pools(
+    name VARCHAR(64) PRIMARY KEY
+);
+
+CREATE TABLE item_to_pool(
+    item VARCHAR(64) REFERENCES items(name)
+        ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+    pool VARCHAR(64) REFERENCES pools(name)
+        ON UPDATE CASCADE ON DELETE CASCADE NOT NULL
+);
+
+INSERT INTO items (name) VALUES('Brimstone');
+INSERT INTO items (name) VALUES('Sacred Heart');
+INSERT INTO items (name) VALUES('The Wafer');
+
+INSERT INTO pools (name) VALUES('Treasure');
+INSERT INTO pools (name) VALUES('Devil');
+INSERT INTO pools (name) VALUES('Ultra Secret');
+INSERT INTO pools (name) VALUES('Angel');
+
+INSERT INTO item_to_pool (item, pool) VALUES('Brimstone', 'Ultra Secret');
+INSERT INTO item_to_pool (item, pool) VALUES('Brimstone', 'Devil');
+INSERT INTO item_to_pool (item, pool) VALUES('Sacred Heart', 'Ultra Secret');
+INSERT INTO item_to_pool (item, pool) VALUES('Sacred Heart', 'Angel');
+INSERT INTO item_to_pool (item, pool) VALUES('The Wafer', 'Angel');
+INSERT INTO item_to_pool (item, pool) VALUES('The Wafer', 'Treasure');
 `;
 
 DB_URL =
