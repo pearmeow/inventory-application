@@ -6,15 +6,18 @@ Project template for node.js projects
 Features
 --------
 
-- [ ] A
-- [ ] B
-- [ ] C
-- [ ] D
+- [ ] A feature
+- [ ] B feature
+- [ ] C feature
+- [ ] Good styling
 
 How to use this project
 -----------------------
 
 Clone this repo and run `node index`.
+
+Known Limitations
+-----------------
 
 Credits
 -------
