@@ -19,6 +19,17 @@ body {
     padding: 10px;
 }
 
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+button,
+input {
+    min-width: 0%;
+}
+
+input,
 button,
 select {
     padding: 10px;
@@ -48,4 +59,24 @@ form {
 .doubleList {
     display: flex;
     gap: 40px;
+}
+
+@media (width < 1400px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (width < 800px) {
+
+    body,
+    input,
+    select,
+    button {
+        font-size: 30px;
+    }
 }
