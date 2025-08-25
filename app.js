@@ -13,10 +13,10 @@ app.set("view engine", "ejs");
 const assetsPath = path.join(__dirname, "public");
 app.use(express.static(assetsPath));
 
-app.use("/", readRouter);
 app.use("/create", createRouter);
 app.use("/delete", deleteRouter);
 app.use("/update", updateRouter);
+app.use("/", readRouter);
 
 const PORT = 3000;
 
