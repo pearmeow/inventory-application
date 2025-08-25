@@ -23,8 +23,9 @@ Clone this repo and run `node index`.
 
 Known Limitations
 -----------------
-"Bad" operations like adding an existing item or pool will silently fail.
 
+"Bad" operations like adding an existing item or pool will silently fail.
+Autofill font sizes may be wonky
 
 Credits
 -------
