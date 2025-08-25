@@ -53,7 +53,7 @@ async function main() {
     console.log("seeding...");
     const client = new Client({
         connectionString: DB_URL,
-        ssl: argv[2] && true,
+        ssl: false,
     });
     await client.connect();
     await client.query(SQL);
