@@ -35,7 +35,9 @@ const getCreateItemToPool = async (req, res) => {
 const validateName = body("name")
     .trim()
     .notEmpty()
-    .withMessage("Name must not be empty");
+    .withMessage("Name must not be empty")
+    .isLength({ max: 64 })
+    .withMessage("Name must be less than or equal to 64 characters");
 
 const postCreateItem = [
     validateName,
@@ -70,8 +72,18 @@ const postCreatePool = [
 ];
 
 const validatePair = [
-    body("item").trim().notEmpty().withMessage("Item must not be empty"),
-    body("pool").trim().notEmpty().withMessage("Pool must not be empty"),
+    body("item")
+        .trim()
+        .notEmpty()
+        .withMessage("Item must not be empty")
+        .isLength({ max: 64 })
+        .withMessage("Item must be less than or equal to 64 characters"),
+    body("pool")
+        .trim()
+        .notEmpty()
+        .withMessage("Pool must not be empty")
+        .isLength({ max: 64 })
+        .withMessage("Pool must be less than or equal to 64 characters"),
 ];
 
 const postCreateItemToPool = [

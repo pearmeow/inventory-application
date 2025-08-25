@@ -30,7 +30,12 @@ const getUpdatePool = async (req, res) => {
 
 const validatePair = [
     body("oldName").trim().notEmpty().withMessage("Old name must not be empty"),
-    body("newName").trim().notEmpty().withMessage("New name must not be empty"),
+    body("newName")
+        .trim()
+        .notEmpty()
+        .withMessage("New name must not be empty")
+        .isLength({ max: 64 })
+        .withMessage("Name must be less than or equal to 64 characters"),
 ];
 
 const postUpdateItem = [
